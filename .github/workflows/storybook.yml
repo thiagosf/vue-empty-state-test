@@ -15,11 +15,11 @@ jobs:
           cd app
           npm ci
           npm run build-storybook
+          cd ..
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: app/docs-build
-          CLEAN: true
-          TARGET_FOLDER: build
+          branch: gh-pages
+          folder: app/docs-build
+          clean: true
+          target-folder: build
