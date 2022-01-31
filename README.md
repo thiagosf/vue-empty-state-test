@@ -22,7 +22,16 @@ docker-compose up
 
 ## Tests
 
+### Unit
+
 ```bash
 docker-compose run web npm ci
 docker-compose run web npm run test:unit
+```
+
+### Cypress
+
+```bash
+docker-compose run cypress
+docker-compose down
 ```

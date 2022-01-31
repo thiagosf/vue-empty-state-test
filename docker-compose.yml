@@ -5,12 +5,15 @@ services:
     image: node:15.0.1
     working_dir: /app
     command: npm run serve
+    container_name: empty-state-test-web
     volumes:
       - ./app:/app
     ports:
       - 8080:8080
     depends_on:
       - storybook
+    networks:
+      - empty-state-test-network
 
   storybook:
     image: node:15.0.1
@@ -20,3 +23,20 @@ services:
       - ./app:/app
     ports:
       - 6006:6006
+
+  cypress:
+    image: cypress/included:9.3.1
+    working_dir: /e2e
+    command: run
+    depends_on:
+      - web
+    links:
+      - web
+    volumes:
+      - ./app:/e2e
+    networks:
+      - empty-state-test-network
+
+networks:
+  empty-state-test-network:
+    driver: bridge
